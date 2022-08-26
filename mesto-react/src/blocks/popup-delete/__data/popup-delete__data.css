@@ -1,0 +1,11 @@
+.popup-delete__data {
+    margin: 21px 36px 0px 36px;
+    min-height: 80px;
+    /* min-height: 130px; */
+}
+@media screen and (max-width: 787px) {
+    .popup-delete__data {
+        margin: 0 22px;
+    }
+    
+}

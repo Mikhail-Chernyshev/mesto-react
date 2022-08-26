@@ -1,0 +1,11 @@
+.popup-post__data {
+        margin: 21px 36px 0px 36px;
+        min-height: 249px;
+    
+}
+@media screen and (max-width: 787px) {
+    .popup-post__data {
+        margin: 0 22px;
+    }
+    
+}
