@@ -4,44 +4,36 @@ import api from "../utils/Api.js";
 import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
 import Card from "./Card.js";
+import { useEffect, useState } from "react";
 
 function Main({
   onEditAvatar,
   onEditProfile,
   onAddPlace,
-  isEditProfilePopupOpen,
-  isAddPlacePopupOpen,
-  isEditAvatarPopupOpen,
-  onClose,
   onCardClick,
   onDeleteConfirmPopup,
   isDeleteConfirmPopupOpen,
 }) {
-  const [userName, setUserName] = React.useState();
-  const [userDescription, setUserDescription] = React.useState();
-  const [userAvatar, setUserAvatar] = React.useState();
-  const [cards, setCards] = React.useState([]);
+  const [userName, setUserName] = useState("");
+  const [userDescription, setUserDescription] = useState("");
+  const [userAvatar, setUserAvatar] = useState("");
+  const [cards, setCards] = useState([]);
 
-  React.useEffect(() => {
-    api.getCards().then((data) => setCards(data));
-  });
-  React.useEffect(() => {
-    api.getUserInfo().then((data) =>
-      // console.log(data)
-      setUserAvatar(data.avatar)
-    );
+  useEffect(() => {
+    api.getCards().then((data) => {
+      setCards(data);
+    }).catch((err) => {
+      console.log(err)
+    });
   }, []);
-  React.useEffect(() => {
-    api.getUserInfo().then((data) =>
-      // console.log(data)
-      setUserName(data.name)
-    );
-  }, []);
-  React.useEffect(() => {
-    api.getUserInfo().then((data) =>
-      // console.log(data)
-      setUserDescription(data.about)
-    );
+  useEffect(() => {
+    api.getUserInfo().then((data) => {
+      setUserAvatar(data.avatar);
+      setUserName(data.name);
+      setUserDescription(data.about);
+    }).catch((err) => {
+      console.log(err)
+    });
   }, []);
 
   return (
@@ -80,10 +72,10 @@ function Main({
         </button>
       </section>
       <section class="elements">
-        {cards.map((card, id) => {
+        {cards.map((card, _id) => {
           return (
             <Card
-              key={id}
+              key={_id}
               card={card}
               onCardClick={onCardClick}
               onDeleteConfirmPopup={onDeleteConfirmPopup}
@@ -92,100 +84,6 @@ function Main({
           );
         })}
       </section>
-      <PopupWithForm
-        onClose={onClose}
-        name="profile"
-        title="Редактировать профиль"
-        isOpen={isEditProfilePopupOpen}
-      >
-        <div class="popup__container">
-          <input
-            type="text"
-            id="name-input"
-            minLength="2 "
-            maxLength="40 "
-            name="name"
-            class="popup__input popup__input_data_name"
-            required
-            placeholder="Имя "
-          />
-          <span class="popup__input-error name-input-error"></span>
-        </div>
-        <div class="popup__container">
-          <input
-            type="text"
-            id="rank-input"
-            minLength="2"
-            maxLength="200 "
-            name="rank"
-            class="popup__input popup__input_data_rank"
-            required="required "
-            placeholder="О себе "
-          />
-          <span class="popup__input-error rank-input-error"></span>
-        </div>
-      </PopupWithForm>
-
-      <PopupWithForm
-        onClose={onClose}
-        isOpen={isAddPlacePopupOpen}
-        name="post"
-        title="Новое место"
-      >
-        {" "}
-        <div class="popup__container">
-          <input
-            type="text "
-            id="post-name-input"
-            minLength="2 "
-            maxLength="30 "
-            name="name"
-            class="popup__input popup-post__input popup-post__input_data_name"
-            required="required "
-            placeholder="Название "
-          />
-          <span class="popup__input-error post-name-input-error"></span>
-        </div>
-        <div class="popup__container">
-          <input
-            type="url"
-            id="post-url-input"
-            name="link"
-            class="popup-post__input popup__input popup-post__input_data_link"
-            required="required "
-            placeholder="Ссылка на картинку "
-          />
-          <span class="popup__input-error post-url-input-error"></span>
-        </div>
-      </PopupWithForm>
-
-      <PopupWithForm
-        onClose={onClose}
-        // onClick={handleDeletePlaceClick}
-        name="delete"
-        title="Вы уверены?"
-        isOpen={isDeleteConfirmPopupOpen}
-      />
-      <PopupWithForm
-        onClose={onClose}
-        isOpen={isEditAvatarPopupOpen}
-        name="avatar"
-        title="Обновить аватар"
-      >
-        <div class="popup__container popup-avatar__container">
-          <input
-            type="url"
-            id="avatar-name-input"
-            minLength="2 "
-            maxLength="200"
-            name="link"
-            class="popup__input popup-avatar__input popup-avatar__input_data_name"
-            required="required"
-            placeholder="Введите ссылку"
-          />
-          <span class="popup__input-error avatar-name-input-error"></span>
-        </div>
-      </PopupWithForm>
     </main>
   );
 }
