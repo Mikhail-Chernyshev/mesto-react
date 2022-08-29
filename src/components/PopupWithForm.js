@@ -14,7 +14,7 @@ function PopupWithForm(props) {
         <h2 class="popup__title">{props.title}</h2>
         <form
           action="#"
-          novalidate
+          noValidate
           className={`popup__data popup-${props.name}__data`}
           name="formpopup"
         >

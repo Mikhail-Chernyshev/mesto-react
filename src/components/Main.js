@@ -15,7 +15,7 @@ function Main({
   onClose,
   onCardClick,
   onDeleteConfirmPopup,
-  isDeleteConfirmPopupOpen
+  isDeleteConfirmPopupOpen,
 }) {
   const [userName, setUserName] = React.useState();
   const [userDescription, setUserDescription] = React.useState();
@@ -48,7 +48,7 @@ function Main({
     <main class="main">
       <section class="profile">
         {/* <!-- <div class="profile__container"> --> */}
-        <img src={userAvatar}  alt="аватар" class="profile__avatar" />
+        <img src={userAvatar} alt="аватар" class="profile__avatar" />
         <div class="profile__button-edit" onClick={onEditAvatar}></div>
         {/* <!-- </div> --> */}
         <h1 class="profile__name">{userName}</h1>
@@ -80,14 +80,17 @@ function Main({
         </button>
       </section>
       <section class="elements">
-      {cards.map((card) => {
-   return (
-<Card card={card}
-onCardClick={onCardClick}
-onDeleteConfirmPopup={onDeleteConfirmPopup}
-isOpen={isDeleteConfirmPopupOpen}/>
-   )
-        })} 
+        {cards.map((card, id) => {
+          return (
+            <Card
+              key={id}
+              card={card}
+              onCardClick={onCardClick}
+              onDeleteConfirmPopup={onDeleteConfirmPopup}
+              isOpen={isDeleteConfirmPopupOpen}
+            />
+          );
+        })}
       </section>
       <PopupWithForm
         onClose={onClose}
@@ -99,8 +102,8 @@ isOpen={isDeleteConfirmPopupOpen}/>
           <input
             type="text"
             id="name-input"
-            minlength="2 "
-            maxlength="40 "
+            minLength="2 "
+            maxLength="40 "
             name="name"
             class="popup__input popup__input_data_name"
             required
@@ -112,8 +115,8 @@ isOpen={isDeleteConfirmPopupOpen}/>
           <input
             type="text"
             id="rank-input"
-            minlength="2 "
-            maxlength="200 "
+            minLength="2"
+            maxLength="200 "
             name="rank"
             class="popup__input popup__input_data_rank"
             required="required "
@@ -134,8 +137,8 @@ isOpen={isDeleteConfirmPopupOpen}/>
           <input
             type="text "
             id="post-name-input"
-            minlength="2 "
-            maxlength="30 "
+            minLength="2 "
+            maxLength="30 "
             name="name"
             class="popup__input popup-post__input popup-post__input_data_name"
             required="required "
@@ -155,7 +158,7 @@ isOpen={isDeleteConfirmPopupOpen}/>
           <span class="popup__input-error post-url-input-error"></span>
         </div>
       </PopupWithForm>
-    
+
       <PopupWithForm
         onClose={onClose}
         // onClick={handleDeletePlaceClick}
@@ -173,8 +176,8 @@ isOpen={isDeleteConfirmPopupOpen}/>
           <input
             type="url"
             id="avatar-name-input"
-            minlength="2 "
-            maxlength="200"
+            minLength="2 "
+            maxLength="200"
             name="link"
             class="popup__input popup-avatar__input popup-avatar__input_data_name"
             required="required"
@@ -188,4 +191,3 @@ isOpen={isDeleteConfirmPopupOpen}/>
 }
 
 export default Main;
-
