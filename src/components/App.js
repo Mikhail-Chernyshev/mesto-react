@@ -53,7 +53,6 @@ function App() {
           name="profile"
           title="Редактировать профиль"
           isOpen={isEditProfilePopupOpen}
-          buttonText="Сохранить"
         >
           <div class="popup__container">
             <input
@@ -130,7 +129,6 @@ function App() {
           isOpen={isEditAvatarPopupOpen}
           name="avatar"
           title="Обновить аватар"
-          buttonText="Сохранить"
         >
           <div class="popup__container popup-avatar__container">
             <input

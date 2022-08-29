@@ -4,8 +4,8 @@ function ImagePopup({card, onClose}) {
       <div class="popup-bigpic__content">
         {/* <!-- <div class="popup-bigpic__image"> --> */}
         <img
-          src={card && card.link}
-          alt={card && card.name}
+          src={card?.link}
+          alt={card?.name}
           class="popup-bigpic__pic"
         />
         <p class="popup-bigpic__title"></p>

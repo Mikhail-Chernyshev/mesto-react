@@ -67,10 +67,11 @@ function Main({
         </button>
       </section>
       <section class="elements">
-        {cards.map((card, _id) => {
+        {cards.map((card) => {
+           console.log(card._id)
           return (
             <Card
-              key={_id}
+              key={card._id}
               card={card}
               onCardClick={onCardClick}
               onDeleteConfirmPopup={onDeleteConfirmPopup}
