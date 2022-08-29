@@ -20,22 +20,17 @@ function Main({
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    api.getCards().then((data) => {
-      setCards(data);
-    }).catch((err) => {
-      console.log(err)
-    });
+    Promise.all([api.getUserInfo(), api.getCards()])
+      .then(([user, cards]) => {
+        setUserAvatar(user.avatar);
+        setUserName(user.name);
+        setUserDescription(user.about);
+        setCards(cards);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
-  useEffect(() => {
-    api.getUserInfo().then((data) => {
-      setUserAvatar(data.avatar);
-      setUserName(data.name);
-      setUserDescription(data.about);
-    }).catch((err) => {
-      console.log(err)
-    });
-  }, []);
-
   return (
     <main class="main">
       <section class="profile">
