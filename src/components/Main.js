@@ -1,5 +1,5 @@
-import buttonEditImage from ".././images/Vector.svg";
-import buttonAddImage from ".././images/Vectorrrbutton.svg";
+import buttonEditImage from "../images/Vector.svg";
+import buttonAddImage from "../images/Vectorrrbutton.svg";
 import api from "../utils/Api.js";
 import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
