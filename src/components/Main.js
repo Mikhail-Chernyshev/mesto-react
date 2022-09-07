@@ -2,9 +2,9 @@ import buttonEditImage from "../images/Vector.svg";
 import buttonAddImage from "../images/Vectorrrbutton.svg";
 import api from "../utils/Api.js";
 import React from "react";
-import PopupWithForm from "./PopupWithForm.js";
 import Card from "./Card.js";
 import { useEffect, useState } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function Main({
   onEditAvatar,
@@ -13,33 +13,20 @@ function Main({
   onCardClick,
   onDeleteConfirmPopup,
   isDeleteConfirmPopupOpen,
+  cards,
+  onCardLike,
+  onCardDelete,
+  onClose,
+  onDeleteClick,
 }) {
-  const [userName, setUserName] = useState("");
-  const [userDescription, setUserDescription] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getCards()])
-      .then(([user, cards]) => {
-        setUserAvatar(user.avatar);
-        setUserName(user.name);
-        setUserDescription(user.about);
-        setCards(cards);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const currentUser = React.useContext(CurrentUserContext);
   return (
     <main class="main">
       <section class="profile">
-        {/* <!-- <div class="profile__container"> --> */}
-        <img src={userAvatar} alt="аватар" class="profile__avatar" />
+        <img src={currentUser.avatar} alt="аватар" class="profile__avatar" />
         <div class="profile__button-edit" onClick={onEditAvatar}></div>
-        {/* <!-- </div> --> */}
-        <h1 class="profile__name">{userName}</h1>
-        <p class="profile__rank">{userDescription}</p>
+        <h1 class="profile__name">{currentUser.name}</h1>
+        <p class="profile__rank">{currentUser.about}</p>
 
         <button
           type="button"
@@ -68,14 +55,14 @@ function Main({
       </section>
       <section class="elements">
         {cards.map((card) => {
-           console.log(card._id)
           return (
             <Card
               key={card._id}
               card={card}
               onCardClick={onCardClick}
-              onDeleteConfirmPopup={onDeleteConfirmPopup}
-              isOpen={isDeleteConfirmPopupOpen}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
+              onDeleteClick={onDeleteClick}
             />
           );
         })}

@@ -2,7 +2,6 @@ class Api {
   constructor({ host, token }) {
     this._host = host;
     this._token = token;
-
   }
   _getJsonOnError(res) {
     if (res.ok) {
@@ -58,6 +57,7 @@ class Api {
       }),
     }).then((res) => this._getJsonOnError(res));
   }
+
   editAvatar(data) {
     return fetch(`${this._host}/users/me/avatar`, {
       method: "PATCH",
