@@ -60,14 +60,16 @@ function App() {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
     if (!isLiked) {
-      api.setLikeCard(card._id, !isLiked).then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      api
+        .setLikeCard(card._id, !isLiked)
+        .then((newCard) => {
+          setCards((state) =>
+            state.map((c) => (c._id === card._id ? newCard : c))
+          );
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     } else {
       api
         .removeLikeCard(card._id, isLiked)
@@ -85,13 +87,13 @@ function App() {
     api
       .deleteCard(card)
       .then(() => {
-        // console.log(cards)
-        setCards((cards) => cards.filter((c) => c._id !== card._id));
+        setCards((state) => state.filter((c) => c._id !== card._id));
       })
       .catch((err) => {
         console.error(err);
       });
   }
+
   function handleUpdateUser(user) {
     api
       .editUserInfo(user)
@@ -104,70 +106,75 @@ function App() {
       });
   }
   function handleUpdateAvatar(user) {
-    api.editAvatar(user).then((updateAvatar) => {
-      setCurrentUser(updateAvatar);
-      closeAllPopups();
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+    api
+      .editAvatar(user)
+      .then((updateAvatar) => {
+        setCurrentUser(updateAvatar);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
   function handleAddPlaceSubmit(place) {
-    api.addCard(place).then((addedPlace) => {
-      setCards([addedPlace, ...cards]);
-      closeAllPopups();
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+    api
+      .addCard(place)
+      .then((addedPlace) => {
+        setCards([addedPlace, ...cards]);
+        // setCards(cards)
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
   return (
     <CurrentUserContext.Provider value={currentUser}>
-        <div className="page">
-          <Header />
-          <Main
-            onEditProfile={handleEditProfileClick}
-            onEditAvatar={handleEditAvatarClick}
-            onAddPlace={handleAddPlaceClick}
-            onCardClick={handleCardClick}
-            cards={cards}
-            onCardLike={handleCardLike}
-            onCardDelete={handleDeleteConfirmClick}
-            onClose={closeAllPopups}
-            onDeleteClick={handleCardDelete}
-          />
-          <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            onUpdateUser={handleUpdateUser}
-          />
-          <AddPlacePopup
-            onClose={closeAllPopups}
-            isOpen={isAddPlacePopupOpen}
-            onAddPlace={handleAddPlaceSubmit}
-          />
-          {/* <DeleteConfirmPopup
+      <div className="page">
+        <Header />
+        <Main
+          onEditProfile={handleEditProfileClick}
+          onEditAvatar={handleEditAvatarClick}
+          onAddPlace={handleAddPlaceClick}
+          onCardClick={handleCardClick}
+          cards={cards}
+          onCardLike={handleCardLike}
+          onCardDelete={handleDeleteConfirmClick}
+          onClose={closeAllPopups}
+          onDeleteClick={handleCardDelete}
+        />
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+        />
+        <AddPlacePopup
+          onClose={closeAllPopups}
+          isOpen={isAddPlacePopupOpen}
+          onAddPlace={handleAddPlaceSubmit}
+        />
+        {/* <DeleteConfirmPopup
           onClose={closeAllPopups}
           isOpen={isDeleteConfirmPopupOpen}
           onSubmit={handleCardDelete}
          /> */}
-          <PopupWithForm
-            onClose={closeAllPopups}
-            onSubmit={handleCardDelete}
-            name="delete"
-            title="Вы уверены?"
-            isOpen={isDeleteConfirmPopupOpen}
-            buttonText="Удалить"
-          />
-          <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onUpdateAvatar={handleUpdateAvatar}
-          />
-          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-          <Footer />
-        </div>
-        {/* <!-- <script type="module" src="./pages/index.js "></script> --> */}
+        <PopupWithForm
+          onClose={closeAllPopups}
+          onSubmit={handleCardDelete}
+          name="delete"
+          title="Вы уверены?"
+          isOpen={isDeleteConfirmPopupOpen}
+          buttonText="Удалить"
+        />
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+        <Footer />
+      </div>
+      {/* <!-- <script type="module" src="./pages/index.js "></script> --> */}
     </CurrentUserContext.Provider>
   );
 }
