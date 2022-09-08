@@ -64,6 +64,9 @@ function App() {
         setCards((state) =>
           state.map((c) => (c._id === card._id ? newCard : c))
         );
+      })
+      .catch((err) => {
+        console.error(err);
       });
     } else {
       api
@@ -82,7 +85,8 @@ function App() {
     api
       .deleteCard(card)
       .then(() => {
-        setCards((cards) => cards.filter((c) => c._id !== card._id && c));
+        // console.log(cards)
+        setCards((cards) => cards.filter((c) => c._id !== card._id));
       })
       .catch((err) => {
         console.error(err);
@@ -103,18 +107,23 @@ function App() {
     api.editAvatar(user).then((updateAvatar) => {
       setCurrentUser(updateAvatar);
       closeAllPopups();
+    })
+    .catch((err) => {
+      console.error(err);
     });
   }
   function handleAddPlaceSubmit(place) {
     api.addCard(place).then((addedPlace) => {
       setCards([addedPlace, ...cards]);
       closeAllPopups();
+    })
+    .catch((err) => {
+      console.error(err);
     });
   }
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <body class="body">
-        <div class="page">
+        <div className="page">
           <Header />
           <Main
             onEditProfile={handleEditProfileClick}
@@ -159,7 +168,6 @@ function App() {
           <Footer />
         </div>
         {/* <!-- <script type="module" src="./pages/index.js "></script> --> */}
-      </body>
     </CurrentUserContext.Provider>
   );
 }

@@ -27,7 +27,7 @@ function AddPlacePopup(props) {
       buttonText="Добавить"
     >
       {" "}
-      <div class="popup__container">
+      <div className="popup__container">
         <input
           type="text "
           id="post-name-input"
@@ -36,24 +36,24 @@ function AddPlacePopup(props) {
           name="name"
           onChange={handleNameChange}
           value={name}
-          class="popup__input popup-post__input popup-post__input_data_name"
+          className="popup__input popup-post__input popup-post__input_data_name"
           required="required "
           placeholder="Название "
         />
-        <span class="popup__input-error post-name-input-error"></span>
+        <span className="popup__input-error post-name-input-error"></span>
       </div>
-      <div class="popup__container">
+      <div className="popup__container">
         <input
           type="url"
           id="post-url-input"
           name="link"
           onChange={handleLinkChange}
           value={link}
-          class="popup-post__input popup__input popup-post__input_data_link"
+          className="popup-post__input popup__input popup-post__input_data_link"
           required="required "
           placeholder="Ссылка на картинку "
         />
-        <span class="popup__input-error post-url-input-error"></span>
+        <span className="popup__input-error post-url-input-error"></span>
       </div>
     </PopupWithForm>
   );

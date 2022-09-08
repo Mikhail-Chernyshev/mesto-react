@@ -3,7 +3,7 @@ import PopupWithForm from "./PopupWithForm.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 function EditAvatarPopup(props) {
   const currentUser = React.useContext(CurrentUserContext);
-  const myRef = React.createRef();
+  const myRef = React.useRef();
   function handleSubmit(evt) {
     evt.preventDefault();
     props.onUpdateAvatar({
@@ -18,7 +18,7 @@ function EditAvatarPopup(props) {
       name="avatar"
       title="Обновить аватар"
     >
-      <div class="popup__container popup-avatar__container">
+      <div className="popup__container popup-avatar__container">
         <input
           ref={myRef}
           type="url"
@@ -26,11 +26,11 @@ function EditAvatarPopup(props) {
           minLength="2 "
           maxLength="200"
           name="link"
-          class="popup__input popup-avatar__input popup-avatar__input_data_name"
+          className="popup__input popup-avatar__input popup-avatar__input_data_name"
           required="required"
           placeholder="Введите ссылку"
         />
-        <span class="popup__input-error avatar-name-input-error"></span>
+        <span className="popup__input-error avatar-name-input-error"></span>
       </div>
     </PopupWithForm>
   );

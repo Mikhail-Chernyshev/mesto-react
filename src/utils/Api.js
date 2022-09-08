@@ -12,6 +12,7 @@ class Api {
   _getHeaders() {
     return {
       authorization: this._token,
+      "Content-Type": "application/json",
     };
   }
   getCards() {
@@ -22,10 +23,7 @@ class Api {
   addCard(data) {
     return fetch(`${this._host}/cards`, {
       method: "POST",
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json",
-      },
+      headers: this._getHeaders(),
       body: JSON.stringify({
         name: data.name,
         link: data.link,

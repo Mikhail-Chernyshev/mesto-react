@@ -27,38 +27,38 @@ function Card({ card, onCardClick, onCardLike, onCardDelete, onDeleteClick }) {
     isLiked ? "element__like_active" : "element__like"
   }`;
   return (
-    <div className="element" key={card._id}>
+    <div className="element">
       <button
-        class={cardDeleteButtonClassName}
+        className={cardDeleteButtonClassName}
         type="button"
         onClick={handleDeleteClick}
       >
         <img
           src={trashup}
           alt="кнопка удаления верх"
-          class="element__trasher-up"
+          className="element__trasher-up"
         />
         <img
           src={trashdown}
           alt="кнопка удаления низ"
-          class="element__trasher-down"
+          className="element__trasher-down"
         />
       </button>
       <img
         alt={card.name}
-        class="element__image"
+        className="element__image"
         src={card.link}
         onClick={handleClick}
       />
-      <div class="element__atribute">
-        <h3 class="element__title">{card.name}</h3>
-        <div class="element__like-container">
+      <div className="element__atribute">
+        <h3 className="element__title">{card.name}</h3>
+        <div className="element__like-container">
           <button
             type="button"
-            class={cardLikeButtonClassName}
+            className={cardLikeButtonClassName}
             onClick={handleLikeClick}
           ></button>
-          <p class="element__score">{card.likes.length}</p>
+          <p className="element__score">{card.likes.length}</p>
         </div>
       </div>
       {/* <DeleteConfirmPopup

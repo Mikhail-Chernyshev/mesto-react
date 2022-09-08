@@ -21,39 +21,39 @@ function Main({
 }) {
   const currentUser = React.useContext(CurrentUserContext);
   return (
-    <main class="main">
-      <section class="profile">
-        <img src={currentUser.avatar} alt="аватар" class="profile__avatar" />
-        <div class="profile__button-edit" onClick={onEditAvatar}></div>
-        <h1 class="profile__name">{currentUser.name}</h1>
-        <p class="profile__rank">{currentUser.about}</p>
+    <main className="main">
+      <section className="profile">
+        <img src={currentUser.avatar} alt="аватар" className="profile__avatar" />
+        <div className="profile__button-edit" onClick={onEditAvatar}></div>
+        <h1 className="profile__name">{currentUser.name}</h1>
+        <p className="profile__rank">{currentUser.about}</p>
 
         <button
           type="button"
           name="edit"
-          class="profile__button-ed-self"
+          className="profile__button-ed-self"
           onClick={onEditProfile}
         >
           <img
             src={buttonEditImage}
             alt="кнопка"
-            class="profile__button-ed-pic"
+            className="profile__button-ed-pic"
           />
         </button>
         <button
           type="button"
           name="add"
-          class="profile__button-add-self"
+          className="profile__button-add-self"
           onClick={onAddPlace}
         >
           <img
             src={buttonAddImage}
             alt="кнопка"
-            class="profile__button-add-pic"
+            className="profile__button-add-pic"
           />
         </button>
       </section>
-      <section class="elements">
+      <section className="elements">
         {cards.map((card) => {
           return (
             <Card
