@@ -45,10 +45,7 @@ class Api {
   editUserInfo(data) {
     return fetch(`${this._host}/users/me`, {
       method: "PATCH",
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json",
-      },
+      headers: this._getHeaders(),
       body: JSON.stringify({
         name: data.name,
         about: data.rank,
@@ -59,10 +56,7 @@ class Api {
   editAvatar(data) {
     return fetch(`${this._host}/users/me/avatar`, {
       method: "PATCH",
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json",
-      },
+      headers: this._getHeaders(),
       body: JSON.stringify({
         avatar: data.link,
       }),
@@ -71,19 +65,13 @@ class Api {
   setLikeCard(cardId) {
     return fetch(`${this._host}/cards/${cardId}/likes`, {
       method: "PUT",
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json",
-      },
+      headers: this._getHeaders(),
     }).then((res) => this._getJsonOnError(res));
   }
   removeLikeCard(cardId) {
     return fetch(`${this._host}/cards/${cardId}/likes`, {
       method: "DELETE",
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json",
-      },
+      headers: this._getHeaders(),
     }).then((res) => this._getJsonOnError(res));
   }
 }

@@ -6,6 +6,11 @@ function AddPlacePopup(props) {
   // const currentUser = React.useContext(CurrentUserContext);
   const [name, setName] = React.useState("");
   const [link, setLink] = React.useState("");
+  //эффект для очистки инпутов
+  React.useEffect(() => {
+    setName('');
+    setLink('');
+}, [props.isOpen]);
 
   function handleNameChange(evt) {
     setName(evt.target.value);

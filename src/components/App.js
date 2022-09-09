@@ -26,7 +26,7 @@ function App() {
     isAddPlacePopupOpen ||
     selectedCard;
   const [isLoading, setIsLoading] = React.useState(false);
-  const [currentDeletionCard, setCurrentDeletionCard] = useState('');
+  const [currentDeletionCard, setCurrentDeletionCard] = useState(null);
 
   useEffect(() => {
     function closeByEscape(evt) {
@@ -64,7 +64,7 @@ function App() {
     setSelectedCard(null);
   }
   function handleDeleteConfirmClick(card) {
-    setCurrentDeletionCard(card)
+    setCurrentDeletionCard(card);
     setIsDeleteConfirmPopupOpen(true);
   }
   function handleEditProfileClick() {
@@ -78,10 +78,7 @@ function App() {
     setisAddPlacePopupOpen(true);
   }
   function handleCardLike(card) {
-    console.log(card)
-    // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    // Отправляем запрос в API и получаем обновлённые данные карточки
     if (!isLiked) {
       api
         .setLikeCard(card._id, !isLiked)
@@ -111,7 +108,7 @@ function App() {
       .deleteCard(cardId)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== cardId));
-        closeAllPopups()
+        closeAllPopups();
       })
       .catch((err) => {
         console.error(err);
@@ -195,18 +192,11 @@ function App() {
           onClose={closeAllPopups}
           isOpen={isDeleteConfirmPopupOpen}
           onSubmit={handleCardDelete}
-          onLoading={isLoading}
+          isLoading={isLoading}
           cardId={currentDeletionCard}
-         />
-        {/* <PopupWithForm
-          onClose={closeAllPopups}
-          onSubmit={handleCardDelete}
-          name="delete"
-          title="Вы уверены?"
-          isOpen={isDeleteConfirmPopupOpen}
-          buttonText="Удалить"
-        /> */}
+        />
         <EditAvatarPopup
+          isLoading={isLoading}
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
@@ -214,7 +204,6 @@ function App() {
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         <Footer />
       </div>
-      {/* <!-- <script type="module" src="./pages/index.js "></script> --> */}
     </CurrentUserContext.Provider>
   );
 }

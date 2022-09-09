@@ -2,7 +2,6 @@ import trashup from "../images/Vectortrashup.png";
 import trashdown from "../images/Vectortrashdown.png";
 import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
-// import DeleteConfirmPopup from "./DeleteConfirmPopup";
 function Card({ card, onCardClick, onCardLike, onCardDelete, onDeleteClick, onCardDeleteClick }) {
   function handleClick() {
     onCardClick(card);
@@ -62,11 +61,6 @@ function Card({ card, onCardClick, onCardLike, onCardDelete, onDeleteClick, onCa
           <p className="element__score">{card.likes.length}</p>
         </div>
       </div>
-      {/* <DeleteConfirmPopup
-          onClose={onClose}
-          onClick={onDeleteClick}
-          isOpen={isDeleteConfirmPopupOpen}
-         /> */}
     </div>
   );
 }
