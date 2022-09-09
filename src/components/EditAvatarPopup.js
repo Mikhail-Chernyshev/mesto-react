@@ -1,8 +1,8 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
-import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
+// import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 function EditAvatarPopup(props) {
-  const currentUser = React.useContext(CurrentUserContext);
+  // const currentUser = React.useContext(CurrentUserContext);
   const myRef = React.useRef();
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -17,6 +17,7 @@ function EditAvatarPopup(props) {
       onSubmit={handleSubmit}
       name="avatar"
       title="Обновить аватар"
+      buttonText={props.isLoading ? 'Сохранение...' : 'Обновить'}
     >
       <div className="popup__container popup-avatar__container">
         <input

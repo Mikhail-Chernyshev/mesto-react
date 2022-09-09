@@ -9,7 +9,7 @@ function EditProfilePopup(props) {
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, props.isOpen]);
 
   function handleChangeName(evt) {
     setName(evt.target.value);
@@ -23,11 +23,13 @@ function EditProfilePopup(props) {
   }
   return (
     <PopupWithForm
+      isLoading={props.isLoading}
       onClose={props.onClose}
       name="profile"
       title="Редактировать профиль"
       isOpen={props.isOpen}
       onSubmit={handleSubmit}
+      buttonText={props.isLoading ? 'Сохранение...' : 'Сохранить'}
     >
       <div className="popup__container">
         <input
@@ -38,7 +40,7 @@ function EditProfilePopup(props) {
           name="name"
           className="popup__input popup__input_data_name"
           required
-          value={name || ''}
+          value={name || ""}
           onChange={handleChangeName}
           placeholder="Имя"
         />
@@ -53,7 +55,7 @@ function EditProfilePopup(props) {
           name="rank"
           className="popup__input popup__input_data_rank"
           required="required "
-          value={description || ''}
+          value={description || ""}
           onChange={handleChangeDescription}
           placeholder="О себе "
         />

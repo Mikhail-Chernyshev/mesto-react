@@ -1,8 +1,9 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
-import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
+// import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
+
 function AddPlacePopup(props) {
-  const currentUser = React.useContext(CurrentUserContext);
+  // const currentUser = React.useContext(CurrentUserContext);
   const [name, setName] = React.useState("");
   const [link, setLink] = React.useState("");
 
@@ -24,7 +25,7 @@ function AddPlacePopup(props) {
       onSubmit={handleSubmit}
       name="post"
       title="Новое место"
-      buttonText="Добавить"
+      buttonText={props.isLoading ? 'Сохранение...' : 'Добавить'}
     >
       {" "}
       <div className="popup__container">

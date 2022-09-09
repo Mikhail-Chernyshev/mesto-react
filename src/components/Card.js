@@ -3,7 +3,7 @@ import trashdown from "../images/Vectortrashdown.png";
 import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 // import DeleteConfirmPopup from "./DeleteConfirmPopup";
-function Card({ card, onCardClick, onCardLike, onCardDelete, onDeleteClick }) {
+function Card({ card, onCardClick, onCardLike, onCardDelete, onDeleteClick, onCardDeleteClick }) {
   function handleClick() {
     onCardClick(card);
   }
@@ -12,8 +12,9 @@ function Card({ card, onCardClick, onCardLike, onCardDelete, onDeleteClick }) {
   }
   function handleDeleteClick(evt) {
     evt.preventDefault();
-    onDeleteClick(card._id)
+    onCardDeleteClick(card._id)
   }
+
   const currentUser = React.useContext(CurrentUserContext);
   const isOwn = card.owner._id === currentUser._id;
 

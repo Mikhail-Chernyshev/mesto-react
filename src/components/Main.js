@@ -1,9 +1,7 @@
 import buttonEditImage from "../images/Vector.svg";
 import buttonAddImage from "../images/Vectorrrbutton.svg";
-import api from "../utils/Api.js";
 import React from "react";
 import Card from "./Card.js";
-import { useEffect, useState } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function Main({
@@ -18,6 +16,7 @@ function Main({
   onCardDelete,
   onClose,
   onDeleteClick,
+  onCardDeleteClick
 }) {
   const currentUser = React.useContext(CurrentUserContext);
   return (
@@ -63,6 +62,7 @@ function Main({
               onCardLike={onCardLike}
               onCardDelete={onCardDelete}
               onDeleteClick={onDeleteClick}
+              onCardDeleteClick={onCardDeleteClick}
             />
           );
         })}
