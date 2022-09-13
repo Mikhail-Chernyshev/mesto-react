@@ -1,35 +1,31 @@
 import React, { useState } from "react";
 import PopupWithForm from "./PopupWithForm.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
+import useForm from "../hooks/useForm";
+
 function EditProfilePopup(props) {
   const currentUser = React.useContext(CurrentUserContext);
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const { values, errors, handleChange, isFormValid, resetForm } = useForm();
 
   React.useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
-  }, [currentUser, props.isOpen]);
+    currentUser ? resetForm(currentUser) : resetForm();
+  }, [currentUser, resetForm, props.isOpen]);
 
-  function handleChangeName(evt) {
-    setName(evt.target.value);
-  }
-  function handleChangeDescription(evt) {
-    setDescription(evt.target.value);
-  }
   function handleSubmit(evt) {
     evt.preventDefault();
-    props.onUpdateUser({ name, rank: description });
+    props.onUpdateUser({ name: values.name, rank: values.rank });
+    console.log(values.about)
   }
   return (
     <PopupWithForm
+      isFormValid={isFormValid}
       isLoading={props.isLoading}
       onClose={props.onClose}
       name="profile"
       title="Редактировать профиль"
       isOpen={props.isOpen}
       onSubmit={handleSubmit}
-      buttonText={props.isLoading ? 'Сохранение...' : 'Сохранить'}
+      buttonText={props.isLoading ? "Сохранение..." : "Сохранить"}
     >
       <div className="popup__container">
         <input
@@ -40,11 +36,15 @@ function EditProfilePopup(props) {
           name="name"
           className="popup__input popup__input_data_name"
           required
-          value={name || ""}
-          onChange={handleChangeName}
+          value={values.name || ""}
+          onChange={handleChange}
           placeholder="Имя"
         />
-        <span className="popup__input-error name-input-error"></span>
+        {errors.name && (
+          <span className="popup__input-error popup__input-error_active name-input-error">
+            {errors.name}
+          </span>
+        )}
       </div>
       <div className="popup__container">
         <input
@@ -55,11 +55,15 @@ function EditProfilePopup(props) {
           name="rank"
           className="popup__input popup__input_data_rank"
           required="required "
-          value={description || ""}
-          onChange={handleChangeDescription}
+          value={values.about || ""}
+          onChange={handleChange}
           placeholder="О себе "
         />
-        <span className="popup__input-error rank-input-error"></span>
+        {errors.rank && (
+          <span className="popup__input-error popup__input-error_active rank-input-error">
+            {errors.rank}
+          </span>
+        )}
       </div>
     </PopupWithForm>
   );

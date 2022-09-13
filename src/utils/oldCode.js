@@ -122,3 +122,23 @@
     //           class="popup__data popup-avatar__data"
     //           name="formpopup "
     //         >
+
+      // const [name, setName] = React.useState("");
+  // const [link, setLink] = React.useState("");
+  //эффект для очистки инпутов
+//   React.useEffect(() => {
+//     setName('');
+//     setLink('');
+// }, [props.isOpen]);
+
+  // function handleNameChange(evt) {
+  //   setName(evt.target.value);
+  // }
+
+  // function handleLinkChange(evt) {
+  //   setLink(evt.target.value);
+  // }
+  // function handleSubmit(evt) {
+  //   evt.preventDefault();
+  //   props.onAddPlace({ name: name, link: link });
+  // }

@@ -1,8 +1,8 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
-// import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
+import useForm from "../hooks/useForm";
+
 function EditAvatarPopup(props) {
-  // const currentUser = React.useContext(CurrentUserContext);
   const myRef = React.useRef();
   function handleSubmit(evt) {
     evt.preventDefault();
