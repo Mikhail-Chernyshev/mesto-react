@@ -13,8 +13,7 @@ function EditProfilePopup(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    props.onUpdateUser({ name: values.name, rank: values.rank });
-    console.log(values.about)
+    props.onUpdateUser({ name: values.name, about: values.about });
   }
   return (
     <PopupWithForm
@@ -52,7 +51,7 @@ function EditProfilePopup(props) {
           id="rank-input"
           minLength="2"
           maxLength="200 "
-          name="rank"
+          name="about"
           className="popup__input popup__input_data_rank"
           required="required "
           value={values.about || ""}

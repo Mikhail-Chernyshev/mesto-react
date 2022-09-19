@@ -48,7 +48,7 @@ class Api {
       headers: this._getHeaders(),
       body: JSON.stringify({
         name: data.name,
-        about: data.rank,
+        about: data.about,
       }),
     }).then((res) => this._getJsonOnError(res));
   }

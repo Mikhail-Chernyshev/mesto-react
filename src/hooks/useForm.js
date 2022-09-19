@@ -6,8 +6,9 @@ const useForm = () => {
   const [isFormValid, setIsFormValid] = useState(false);
 
   const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+    // const name = event.target.name;
+    // const value = event.target.value;
+    const { name, value } = event.target;
 
     setValues({
       ...values,
@@ -19,7 +20,7 @@ const useForm = () => {
       [name]: event.target.validationMessage,
     });
 
-    setIsFormValid(event.target.closest('.popup__data').checkValidity());
+    setIsFormValid(event.target.closest(".popup__data").checkValidity());
   };
 
   const resetForm = useCallback(

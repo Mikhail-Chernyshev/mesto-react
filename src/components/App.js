@@ -151,7 +151,6 @@ function App() {
       .addCard(place)
       .then((addedPlace) => {
         setCards([addedPlace, ...cards]);
-        // setCards(cards)
         closeAllPopups();
       })
       .catch((err) => {
